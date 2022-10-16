@@ -1,5 +1,6 @@
 import csv
 import random
+import config
 from contextlib import suppress
 
 import matplotlib.pyplot as plt
@@ -250,7 +251,7 @@ def twinword_request(*args):
     url = "https://twinword-word-graph-dictionary.p.rapidapi.com/definition/"
     querystring = {"entry": display}
     headers = {
-        'x-rapidapi-key':  'env_file.env',
+        'x-rapidapi-key':  config.key(),
         'x-rapidapi-host': "twinword-word-graph-dictionary.p.rapidapi.com"
     }
     response = requests.request("GET", url, headers=headers, params=querystring)
@@ -272,7 +273,7 @@ def datamuse_request(*args):
     :param args: display, gl, noose
     :return: display, gl, noose
     """
-    response = requests.get(f"http://api.datamuse.com//words?sp={args[0]}&md=d")
+    response = requests.get(f"http://api.datamuse.com//words?d=")
     x = (response.json())
     try:
         for i in x[0]['defs']:
